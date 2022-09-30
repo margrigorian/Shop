@@ -1,0 +1,84 @@
+.registrationFormContainer{
+    /* width: 45%; */
+    width: 576px;
+    height: 100vh;
+    background-color: white;
+    letter-spacing: 0.5px;
+    color: rgb(52, 51, 51);
+}
+.closeIcon{
+    text-align: right;
+    font-size: 20px;
+    color: rgb(68, 67, 67);
+    margin: 3% 4% 0 0;
+    cursor: pointer;
+}
+.registrationHeaderText{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 5%;
+}
+.form{
+    width: 70%;
+    /* border: 1px solid; */
+    margin: 0 auto;
+}
+.radioContainer{
+    margin-bottom: 15px;
+}
+.radioFemale{
+    margin-right: 32px; 
+}
+.inputContainer{
+    height: 75px;
+}
+.input{
+    width: 100%;
+    padding: 15px;
+    border: 1px solid lightgrey;
+    letter-spacing: 0.5px;
+}
+.checkboxPolicyContainer{
+    display: flex;
+    align-items: center;
+    margin-top: -5px;
+}
+.checkboxReceiveNewsContainer{
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.checkboxLabel{
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    margin-left: -10px;
+}
+.policySpan{
+    font-weight: bold;
+    border-bottom: 1px solid;
+}
+.policySpan:hover {
+    cursor: pointer;
+    color: rgb(150, 148, 148);
+}
+.error{
+    font-size: 12px;
+    color: rgb(212, 31, 31);
+    letter-spacing: -0.3px;
+    margin-top: 3px;
+    padding-left: 15px;
+}
+.submitButton{
+    width: 100%;
+    padding: 4.5% 0;
+    border-radius: 10px;
+    background-color: rgb(52, 51, 51);
+    border: none;
+    cursor: pointer;
+    color: white;
+    letter-spacing: 0.5px;
+    margin-top: 5%;
+}
+.submitButton:hover {
+    background-color: rgb(192, 190, 190);
+}

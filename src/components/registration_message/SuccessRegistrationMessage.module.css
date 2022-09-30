@@ -1,0 +1,30 @@
+.messageContainer{
+    width: 380px;
+    height: 260px;
+    text-align: center;
+    background-color: white;
+    font-family: "Segoe Script";
+}
+.closeIcon{
+    text-align: right;
+    font-size: 20px;
+    cursor: pointer;
+    color: rgb(68, 67, 67);
+    margin: 5% 6% 0 0;
+}
+.textContainer{
+    margin: 3% auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 60%;
+    border-left: 1px solid;
+    border-bottom: 1px solid;
+    border-color: lightgrey
+}
+.messageText{
+    letter-spacing: 0.5px;
+    line-height: 30px;
+    font-weight: 500;
+}

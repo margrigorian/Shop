@@ -2,7 +2,7 @@ import React from 'react';
 import style from "./LoginForm.module.css";
 import { useForm } from "react-hook-form";
 
-export default function LoginForm() {
+export default function LoginForm({changeRegistrationMode}) {
     // useForm - это метод, который возварщает объект
     const { register, formState: { errors }, reset, handleSubmit} = useForm({
         mode:"onBlur"
@@ -43,7 +43,7 @@ export default function LoginForm() {
                             required: true,
                             minLength: {
                                 value: 5,
-                                message: "Minimum of 8 characters"
+                                message: "Minimum of 5 characters"
                             }
                         })} 
                             type="Password"
@@ -66,7 +66,12 @@ export default function LoginForm() {
                 
                 <div className={style.createButtonContainer}>
                     <p>Don't have an account?</p>
-                    <button className={`${style.button} ${style.createButton}`}>Create Account</button>
+                    <button 
+                        className={`${style.button} ${style.createButton}`}
+                        onClick={() => changeRegistrationMode()}
+                    >
+                        Create Account
+                    </button>
                 </div>
             </div>
   )

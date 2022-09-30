@@ -6,9 +6,10 @@ import { Search, PersonOutlineOutlined, ShoppingCartOutlined, MenuOutlined } fro
 export default function NavBar() {
   return (
     <AppBar
+        position="static"
         sx={{ 
             backgroundColor: "white",
-            color: "rgb(33, 32, 32)" 
+            color: "rgb(33, 32, 32)"
         }}
     >
         <Toolbar>
