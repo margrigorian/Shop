@@ -1,0 +1,83 @@
+.container{
+    letter-spacing: 0.5px;
+}
+.largePicture{
+    width: 66vw;
+    height: 85vh;
+    /* border: 1px solid; */
+    margin: 0px auto 35px auto;
+    background-image: url("https://s.eximg.jp/exnews/feed/stylehaus/stylehaus_EGSH_ID16633_94fa_1.jpg");
+    background-size: cover;
+}
+.newInContainer{
+    display: flex;
+    align-items: center;
+    padding-left: 2.5%;
+}
+.newInText{
+    margin-right: 42%;
+}
+.dialogsText{
+    font-weight: 500;
+    font-size: 20px;
+}
+.containerLimitedEdition{
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 100px 0 30px 0;
+}
+.containerLimitedEdition p {
+    margin: 35px 0;
+    text-align: center;
+}
+.limitedEditionPoster{
+    height: 80vh;
+    background-image: url("https://static.massimodutti.net/3/cms/assets/uploads/wEditLimited02_5.jpg?impolicy=massimodutti-itxmediumhigh&imwidth=1500&imformat=chrome");
+    background-position: 0% 27%;
+    background-size: cover;
+}
+
+.sibscribeLargeContainer{
+    background-color: rgb(40, 40, 40);
+    color: white;
+    padding: 0 40px;
+}
+.sibscribeSmallContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10% 0;
+}
+.sibscribeDescription{
+    width: 300px;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+.storyText{
+    font-size: 100px;
+    font-weight: bold;
+}
+.buttonSibscribe{
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 15px 50px;
+    background-color: rgb(40, 40, 40);
+    color: white;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+}
+.goToContainer{
+    display: flex;
+    color: white;
+    font-size: 13px;
+}
+.goToElement{
+    margin-left: 20px;
+    font-weight: 500;
+}
+.goToElement:hover {
+    cursor: pointer;
+    color: grey;
+}

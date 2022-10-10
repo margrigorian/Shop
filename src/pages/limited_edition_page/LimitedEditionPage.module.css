@@ -1,0 +1,46 @@
+.container{
+    color: rgb(52, 51, 51);
+    letter-spacing: 0.5px;
+    margin-bottom: 100px;
+}
+.limitedEditionHeader{
+    width: 100%;
+    padding: 3% 30px 3% 3%;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+}
+/* .limitedEditionText{
+    flex-grow: 3;
+} */
+.limitedEditionNavBarContainer{
+    display: flex;  
+    /* flex-grow: 4; */
+}
+.limitedEditionNavBarEl{
+    margin-right: 30px;
+}
+.cursor{
+    cursor: pointer;
+}
+.colorHover:hover {
+    color:  grey;
+}
+.largeTextContainer{
+    padding: 2% 4% 6% 4%;
+}
+.largeText{
+    display: flex;
+    justify-content: space-between;
+    font-size: 80px;
+    font-weight: bold;
+    line-height: 0.9;
+}
+.capsule{
+    text-align: right;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 25px 30px 65px 0;
+    background-color: rgb(73, 73, 39);
+    color: white;
+}

@@ -1,8 +1,9 @@
 import React from 'react';
 import style from "./LoginForm.module.css";
 import { useForm } from "react-hook-form";
+import Checkbox from '@mui/material/Checkbox';
 
-export default function LoginForm({changeRegistrationMode}) {
+export default function LoginForm({closeCart, changeRegistrationMode, openRegistrationForm}) {
     // useForm - это метод, который возварщает объект
     const { register, formState: { errors }, reset, handleSubmit} = useForm({
         mode:"onBlur"
@@ -15,7 +16,7 @@ export default function LoginForm({changeRegistrationMode}) {
 
     return (
             <div className={style.formContainer}>
-                <p className={style.closeIcon}>&#x2717;</p>
+                <p className={style.closeIcon} onClick={() => closeCart()}>&#x2717;</p>
 
                 <form className={style.form} onSubmit={handleSubmit(onSubmit)} >
                     <p className={style.loginHeaderText}>Log in</p>
@@ -58,7 +59,14 @@ export default function LoginForm({changeRegistrationMode}) {
                         
                     <p className={style.forgottenPasswordText}>Forgotten your password?</p>
                     <div className={style.checkboxContainer}>
-                        <input type="checkbox" id="session" className={style.checkbox} />
+                        <Checkbox 
+                            sx={{ 
+                                '& .MuiSvgIcon-root': { 
+                                    fontSize: 30, 
+                                    color: "rgb(192, 190, 190)"
+                                }
+                            }}
+                        />
                         <label htmlFor='session' className={style.checkboxLabel}>Keep session open</label>
                     </div>
                     <button type="submit" className={`${style.button} ${style.submitButton}`}>Log in</button>
@@ -68,6 +76,7 @@ export default function LoginForm({changeRegistrationMode}) {
                     <p>Don't have an account?</p>
                     <button 
                         className={`${style.button} ${style.createButton}`}
+                        style={{backgroundColor: openRegistrationForm ? "rgb(137, 136, 136)" : undefined}}
                         onClick={() => changeRegistrationMode()}
                     >
                         Create Account

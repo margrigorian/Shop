@@ -1,25 +1,26 @@
 import React from 'react';
 import style from "./RegistrationForm.module.css";
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import Checkbox from '@mui/material/Checkbox';
+import { TextField } from '@mui/material';
 
 export default function RegistrationForm({changeRegistrationMode, getSuccessRegistrationMessage}) {
 
-    const { register, formState: { errors }, reset, handleSubmit} = useForm({
+    const { register,getValues, formState: { errors }, reset, handleSubmit, control} = useForm({
         mode:"onBlur"
     });
 
     const onSubmit = (data) => {
-        console.log(JSON.stringify(data));
+        console.log(JSON.stringify(data), getValues());
         reset();
     };
 
     return (
-        <div className={style.registrationFormContainer}>
+        <div className={style.registrationFormContainer} onClick={(event) => event.stopPropagation()}>
             <p className={style.closeIcon} onClick={() => changeRegistrationMode()}>&#x2717;</p>
 
             <form className={style.form} onSubmit={handleSubmit(onSubmit)}>
@@ -130,26 +131,29 @@ export default function RegistrationForm({changeRegistrationMode, getSuccessRegi
 
                     <FormGroup>
                         <div className={style.checkboxPolicyContainer}>
-                            <FormControlLabel {...register("acceptPrivacyPolicy", {
-                                required: true
-                            })} 
-                                control={<Checkbox />} 
-                                // ПОСЛЕ ОТПРАВКИ ФОРМЫ ОСТАЕТСЯ ВЫДЕЛЕННЫМ. ПОЧЕМУ НЕ РАБОТАЕТ RESET?
-                                // менять значение через onchange и state? 
-
-                                // label="I accept the Privacy Policy"
-                                // id="privacyPolicy" не связывает с <label>
-                                sx={{ 
-                                    '& .MuiSvgIcon-root': { 
-                                        fontSize: 30, 
-                                        color: errors?.acceptPrivacyPolicy ? "rgb(212, 31, 31)" : "rgb(192, 190, 190)"
-                                    },
-                                    // '& .MuiFormControlLabel-label': {
-                                    //     fontSize: 12,
-                                    //     letterSpacing: "0.5px"
-                                    // }
-                                }}
+                            <Controller
+                                name="acceptPrivacyPolicy"
+                                control={control}
+                                render={({field}) => <FormControlLabel {...field} 
+                                    control={<Checkbox />} 
+                                    // ПОСЛЕ ОТПРАВКИ ФОРМЫ ОСТАЕТСЯ ВЫДЕЛЕННЫМ. ПОЧЕМУ НЕ РАБОТАЕТ RESET?
+                                    // менять значение через onchange и state? 
+    
+                                    // label="I accept the Privacy Policy"
+                                    // id="privacyPolicy" не связывает с <label>
+                                    sx={{ 
+                                        '& .MuiSvgIcon-root': { 
+                                            fontSize: 30, 
+                                            color: errors?.acceptPrivacyPolicy ? "rgb(212, 31, 31)" : "rgb(192, 190, 190)"
+                                        },
+                                        // '& .MuiFormControlLabel-label': {
+                                        //     fontSize: 12,
+                                        //     letterSpacing: "0.5px"
+                                        // }
+                                    }}
+                                />}
                             />
+                            
                             <label className={style.checkboxLabel}>
                                 I accept the <span className={style.policySpan}>Privacy Policy</span>
                             </label>
@@ -171,7 +175,7 @@ export default function RegistrationForm({changeRegistrationMode, getSuccessRegi
                                 }}
                             />
                             <label className={style.checkboxLabel}>
-                                I agree to receive news, notifications and offers from Michelle
+                                I agree to receive news, notifications and offers from Michellelin
                             </label>
                         </div>
                     </FormGroup>

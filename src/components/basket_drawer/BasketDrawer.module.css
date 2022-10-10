@@ -1,0 +1,97 @@
+.headerDrawerContainer{
+    width: 400px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.5px;
+}
+.drawerHeader{
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+}
+.basketContainer{
+    padding: 5.5% 0;
+    flex-grow: 5;
+    border-bottom: 2.5px solid white;
+}
+.basketContainer:hover {
+    border-color:rgb(52, 51, 51);
+}
+.wishListContainer{
+    flex-grow: 4;
+    display: flex;
+    align-items: center;
+    padding: 4.5% 0;
+    border-bottom: 2.5px solid white;
+}
+.wishListContainer:hover {
+    border-color:rgb(52, 51, 51);
+}
+.wishListHeaderText{
+    margin: 0 20% 0 36%;
+}
+.closeIcon{
+    font-size: 20px;
+    color: rgb(68, 67, 67);
+}
+.closeIcon:hover {
+    color:rgb(137, 136, 136);
+}
+
+
+.basketContent{
+    width: 400px;
+    margin-top: 15%;
+    letter-spacing: 0.5px;
+}
+.iconContainer{
+    display: flex;
+    justify-content: center;
+    color:rgb(52, 51, 51);
+}
+.textCentral{
+    text-align: center;
+}
+.textAboutEmptyBasket{
+    font-weight: bold;
+    font-size: 18px;
+    margin: 2% 0 5% 0;
+}
+.textAboutFavourites{
+    font-size: 13px;
+    padding: 0 8%;
+    font-weight: 500;
+    margin-bottom: 12%;
+}
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+}
+.button{
+    width: 70%;
+    padding: 5% 0;
+    border-radius: 10px;
+    background-color: rgb(52, 51, 51);
+    border: none;
+    cursor: pointer;
+    color: white;
+    letter-spacing: 0.5px;
+}
+.textAboutSeeWishList{
+    font-weight: 500;
+    font-size: 18px;
+    padding: 0 15%;
+    margin: 2% 0 15% 0;
+}
+.textAboutSignUpOrLogin{
+    font-size: 13px;
+    font-weight: 500;
+}
+.textSpan{
+    border-bottom: 1.5px solid;
+}
+.textSpan:hover {
+    color:rgb(137, 136, 136);  
+    cursor: pointer; 
+}

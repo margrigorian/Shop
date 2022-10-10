@@ -1,54 +1,69 @@
 import React from 'react';
 import style from "./NavBar.module.css";
-import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
+import { NavLink } from 'react-router-dom';
+import { IconButton, Typography } from "@mui/material";
 import { Search, PersonOutlineOutlined, ShoppingCartOutlined, MenuOutlined } from "@mui/icons-material"; 
 
-export default function NavBar() {
-  return (
-    <AppBar
-        position="static"
-        sx={{ 
-            backgroundColor: "white",
-            color: "rgb(33, 32, 32)"
-        }}
-    >
-        <Toolbar>
-            <IconButton
-                // color='inherit'
-                sx={{ marginRight: "10px"}} 
-            >
-                <MenuOutlined />
-            </IconButton>
-            <div className={style.logo}>
-                <Typography
-                    variant='h6'   
-                    sx={{ 
-                        fontFamily: "Segoe Script",
-                        fontSize: "25px",
-                        fontWeight: "bold",
-                        cursor: "pointer",
-                        display: "inline" // курсор сработает только на тексте
-                    }}
-                >
-                    michelle
-                </Typography>
+export default function NavBar({openMenu, openLoginDrawer, openBasketDrawer}) {
+    return (
+            <div className={style.navBar}>
+                <div className={style.logoContainer}>
+                    <IconButton
+                        sx={{ marginRight: "10px"}} 
+                        onClick={openMenu}
+                    >
+                        <MenuOutlined />
+                    </IconButton>
+                    <div>
+                        <NavLink to={`/`} className={style.logo}>
+                            <Typography
+                                variant='h6'   
+                                sx={{ 
+                                    fontFamily: "Segoe Script",
+                                    fontSize: "30px",
+                                    fontWeight: "bold",
+                                    cursor: "pointer",
+                                    display: "inline" // курсор сработает только на тексте
+                                }}
+                            >
+                                mishellelin
+                            </Typography>
+                        </NavLink>
+                    </div>
+                </div>
+
+                <div className={style.navBarElementContainer}>
+                    {/* <NavLink className={style.navBarElement} activeclassname={style.active}>NEW</NavLink> */}
+                    <NavLink className={style.navBarElement} activeclassname={style.active}>COLLECTION</NavLink>
+                    <NavLink 
+                        to={'/limited-edition-page/'} 
+                        className={style.navBarElement}
+                        activeclassname={style.active} 
+                    >
+                        LIMITED EDITION
+                    </NavLink>
+                </div>
+
+                <div className={style.iconContainer}>
+                    <IconButton
+                        sx={{ color: "rgb(52, 51, 51)"}}
+                    >
+                        <Search />
+                    </IconButton>
+                    <IconButton
+                        sx={{ color: "rgb(52, 51, 51)"}}
+                        onClick={openLoginDrawer}
+                    >
+                        <PersonOutlineOutlined />
+                    </IconButton>
+                    <IconButton
+                        sx={{ color: "rgb(52, 51, 51)"}}
+                        onClick={openBasketDrawer}
+                    >
+                        <ShoppingCartOutlined />
+                    </IconButton>
+                </div>
             </div>
-            <IconButton
-                sx={{ color: "rgb(52, 51, 51)"}}
-            >
-                <Search />
-            </IconButton>
-            <IconButton
-                sx={{ color: "rgb(52, 51, 51)"}}
-            >
-                <PersonOutlineOutlined />
-            </IconButton>
-            <IconButton
-                sx={{ color: "rgb(52, 51, 51)"}}
-            >
-                <ShoppingCartOutlined />
-            </IconButton>
-        </Toolbar>
-    </AppBar>
-  )
+
+    )
 }

@@ -1,0 +1,86 @@
+.menuContainer{
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+}
+.menuHeader{
+    display: flex;
+    align-items: center;
+    padding: 15px 35px;
+    margin-bottom: 15px;
+}
+.closeContainer{
+    width: 320px;
+    display: flex;
+    align-items: center;
+    color: rgb(68, 67, 67);
+}
+.closeIcon{
+    font-size: 20px;
+    cursor: pointer;
+    padding:0 20px 5px 0;
+
+}
+.closeIcon:hover {
+    color:rgb(137, 136, 136);
+}
+.menuHeaderText{
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid;
+    padding-bottom: 5px;
+    cursor: pointer;
+    font-weight: 500;
+}
+.menuHeaderText:hover {
+    color:rgb(137, 136, 136);
+}
+
+
+.searchContainer{
+    width: 72%;
+    display: flex;
+    align-items: center;
+}
+.searchInput{
+    color: rgb(68, 67, 67);
+    background-color:  rgb(253, 251, 251);
+    letter-spacing: 1px;
+    font-size: 14;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid rgb(68, 67, 67);
+}
+
+.menuContentContainer{
+    height: 80%;
+    display: flex;
+}
+.menuList{
+    flex-grow: 1;
+    padding: 35px;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+.menuListItem{
+    cursor: pointer;
+    display: block;
+}
+.menuListItem:hover {
+    color:rgb(137, 136, 136);
+}
+.listItemMarginBottom{
+    margin-bottom: 18%;
+}
+.listItemPadding{
+    padding-bottom: 4%;
+}
+.collectionListItem{
+    text-decoration: underline;
+}
+.menuImage{
+    flex-grow: 10;
+}

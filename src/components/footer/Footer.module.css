@@ -1,0 +1,45 @@
+.footer{
+    height: 390px;
+    background-color: rgb(40, 40, 40);
+    padding: 4% 3%;
+    color: white;
+    letter-spacing: 0.5px;
+}
+.footerNav{
+    display: flex;
+    font-size: 13px;
+    font-weight: 500;
+    border-top: 1.5px solid white;
+    border-bottom: 1px solid white;
+    padding: 13px 0;
+}
+.footerNavItem{
+    margin-right: 25px;
+}
+.footerNavEl:hover {
+    cursor: pointer;
+    color: grey
+}
+.socialContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2% 0 3% 0;
+}
+.languageContainer{
+    width: 120px;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 12px;
+    margin-right: 10px;
+}
+.countryName{
+    font-weight: 500;
+}
+.cursor{
+    cursor: pointer;
+}
+.bottomTextSize{
+    font-size: 12px;
+    margin-bottom: 7px;
+}

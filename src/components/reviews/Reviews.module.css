@@ -1,0 +1,93 @@
+.reviewsText{
+    font-size: 25px;
+    font-weight: 500;
+}
+.reviewsNumberSpan{
+    font-size: 16px;
+    color: grey;
+}
+.starsContainer{
+    display: flex;
+    justify-content: center;
+}
+.grade{
+    width: 240px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 50px 0 100px 0;
+}
+.noReviewsText{
+    font-size: 14px;
+    color: grey;
+}
+.buttonLeaveReviews{
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 15px 0;
+    color: white;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    margin-top: 40px;
+    background-color: rgb(52, 51, 51);
+}
+.buttonLeaveReviews:hover {
+    background-color: grey;
+}
+
+.reviewForm{
+    width: 605px;
+    margin-bottom: 100px;
+}
+/* .nameInputContainer{
+    height: 80px;
+} */
+.input{
+    width: 100%;
+    padding: 15px;
+    border: 1px solid lightgrey;
+    letter-spacing: 0.5px;
+}
+.commentInputContainer{
+    height: 250px;
+}
+.commentInput{
+    height: 200px;
+    font-family: "Gill Sans", sans-serif;
+}
+.error{
+    font-size: 12px;
+    color: rgb(212, 31, 31);
+    letter-spacing: -0.3px;
+    margin-top: 3px;
+    padding-left: 15px;
+}
+.buttonAddReviews{
+    width: 100%;
+    border-radius: 10px;
+    padding: 15px 0;
+    background-color: white;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+}
+
+.reviewContainer{
+    margin-bottom: 50px;
+}
+.name{
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.review{
+    padding: 20px 30px;
+    background-color: rgb(247, 244, 244);
+}
+.date{
+    text-align: right;
+    color: grey;
+    font-size: 14px;
+}

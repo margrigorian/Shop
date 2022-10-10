@@ -1,3 +1,51 @@
+.navBar{
+    width: 100%;
+    padding: 10px 2%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top:0;
+    color: rgb(33, 32, 32);
+    background-color: white;
+    /* box-shadow: 0px 0px 15px grey; */
+}
+/* .active{
+   text-decoration: none;
+} */
+.logoContainer{
+    display: flex;
+    align-items: center;
+}
 .logo{
     flex-grow: 1;
+    color: grey;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    font-size: 15px;
+}
+.logo:hover {
+    color: lightgrey;
+}
+.navBarElementContainer{
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+}
+.iconContainer{
+    display: flex;
+}
+.navBarElement{
+    text-decoration: none;
+    color: rgb(33, 32, 32);
+    letter-spacing: 0.5px;
+    font-size: 15px;
+}
+.navBarElement:hover {
+    cursor: pointer;
+    color: grey;
+}
+.active{
+    text-decoration: underline;
 }
