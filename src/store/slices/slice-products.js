@@ -46,11 +46,10 @@ const productsSlice = createSlice({
             if(currentProduct.count === currentProduct.maxCount) {
                 currentProduct.count -= 1;
             }
-
-            // console.log(state.massimoProducts.length);
         },
         changeCount: (state, action) => {
-
+            const currentProduct = state.massimoProducts.find(item => item.id === action.payload.id);
+            currentProduct.count = currentProduct.maxCount - +action.payload.count;
         },
         addReviewToProduct: (state, action) => {
             const review = JSON.parse(action.payload.review);
@@ -65,8 +64,6 @@ const productsSlice = createSlice({
                     return item;
                 }
             })
-
-            // console.log(state.massimoProducts);
         }
     }
 })

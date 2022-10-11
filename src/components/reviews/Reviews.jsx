@@ -20,16 +20,13 @@ export default function Reviews({product}) {
     const monthDay = date.getDate();
     const year = date.getFullYear();
 
-    // console.log(date.getMonth());
-    console.log(product.reviews);
-
     const onSubmit = (data) => {
         dispatch(addReviewToProduct({review: JSON.stringify(data), id: product.id}));
         reset();
     };
 
     return (
-        <div>
+        <div className={style.container}>
             <p className={style.reviewsText}>
                 Reviews&nbsp; 
                 <sup>

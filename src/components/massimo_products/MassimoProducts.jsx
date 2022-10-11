@@ -36,7 +36,7 @@ export default function MassimoProducts() {
                                 <AddIcon 
                                     sx={{fontSize: 20, cursor: "pointer", color: "rgb(73, 73, 39)"}}
                                     onClick={() => {
-                                        dispatch(add(item))
+                                        dispatch(add(item.id))
                                         dispatch(addToBasket(item))
                                     }}
                                 />

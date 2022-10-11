@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectProducts } from '../../store/slices/slice-products';
 import { add } from '../../store/slices/slice-products';
 import { addToBasket } from '../../store/slices/slice-basket';
+import { selectBasket } from '../../store/slices/slice-basket';
 import { NavLink } from 'react-router-dom';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -18,22 +19,22 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import Reviews from '../../components/reviews/Reviews';
+import AnchorLink from 'react-anchor-link-smooth-scroll'
 
 export default function ProductPage() {
   const [product, setProduct] = useState({});
   const [like, setLike] = useState(false);
   const [dislike, setDislike] = useState(false);
-  const [openOrderButton, setOpenOrderButton] = useState(false);
   const dispatch = useDispatch();
   const { id } = useParams();
   const allProducts = useSelector(selectProducts);
+  const basketProducts = useSelector(selectBasket);
+  const basketProduct = basketProducts.basket.products.find(item => item.id === product.id);
 
   useEffect(() => {
     const currentProduct = allProducts.massimoProducts.find(item => item.id === +id);
     setProduct(currentProduct);
   }, [id, allProducts])
-
-  console.log(like);
   
   return (
     <div className={style.container}>
@@ -47,13 +48,20 @@ export default function ProductPage() {
             to={`/product/${product.id !== 1 ? product.id - 1 : product.id}`} 
             style={{color: "rgb(52, 51, 51)"}}
           >
-            <KeyboardArrowLeftIcon className={`${style.leftArrows} ${style.hover}`} />
+            <button disabled={product.id === 1 ? "disabled" : undefined} className={style.arrowButton}> 
+              <KeyboardArrowLeftIcon className={`${style.leftArrows} ${style.hover}`} />
+            </button>
           </NavLink>
           <NavLink 
             to={`/product/${product.id !== allProducts.massimoProducts.length ? product.id + 1 : product.id}`}
             style={{color: "rgb(52, 51, 51)"}}
           >
-            <KeyboardArrowRightIcon className={style.hover}/>
+            <button 
+              disabled={product.id === allProducts.massimoProducts.length ? "disabled" : undefined} 
+              className={style.arrowButton}
+            > 
+              <KeyboardArrowRightIcon className={style.hover}/>
+            </button>
           </NavLink>
         </div>
       </div>
@@ -77,10 +85,12 @@ export default function ProductPage() {
                 <StarIcon sx={{fontSize: "18px", marginRight: "4px"}} />
                 <p>0</p>
                 <FiberManualRecordIcon sx={{fontSize: "5px", margin: "0 20px"}} />
-                <p className={style.reviewText}>
-                  {product.reviews ? product.reviews.length : 0} 
-                  <span style={{fontSize: "12px"}}> reviews</span>
-                </p>
+                <AnchorLink href='#review' style={{color: "grey", textDecoration: "none"}}>
+                  <p className={style.reviewText}>
+                      {product.reviews ? product.reviews.length : 0} 
+                      <span style={{fontSize: "12px"}}> reviews</span>
+                  </p>
+                </AnchorLink>
             </div>
 
             {
@@ -136,11 +146,10 @@ export default function ProductPage() {
           </div>
 
           <button 
-            className={!openOrderButton ? style.button : `${style.button} ${style.addButton}`}
+            className={!basketProduct ? style.button : `${style.button} ${style.addButton}`}
             onClick={() => {
               dispatch(add(product.id))
               dispatch(addToBasket(product))
-              setOpenOrderButton(true)
             }}
 
           >
@@ -148,7 +157,7 @@ export default function ProductPage() {
           </button>
 
           {
-            openOrderButton && 
+            basketProduct && 
               <button className={`${style.button} ${style.orderButton}`}>Process order</button>
           }
 
@@ -159,8 +168,9 @@ export default function ProductPage() {
         </div>
       </div>
 
-      <Reviews product={product} />
-      {/* добавить productId={product} */}
+      <section id="review">
+        <Reviews product={product} />
+      </section>
     </div>
   )
 }

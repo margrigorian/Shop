@@ -1,10 +1,13 @@
 import React from 'react';
 import style from "./NavBar.module.css";
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectBasket } from '../../store/slices/slice-basket';
 import { IconButton, Typography } from "@mui/material";
 import { Search, PersonOutlineOutlined, ShoppingCartOutlined, MenuOutlined } from "@mui/icons-material"; 
 
 export default function NavBar({openMenu, openLoginDrawer, openBasketDrawer}) {
+    const basketProducts = useSelector(selectBasket);
     return (
             <div className={style.navBar}>
                 <div className={style.logoContainer}>
@@ -62,6 +65,11 @@ export default function NavBar({openMenu, openLoginDrawer, openBasketDrawer}) {
                     >
                         <ShoppingCartOutlined />
                     </IconButton>
+                    <sup >
+                        <button className={style.basketSup}>
+                        {basketProducts.basket.products.length}
+                        </button>
+                    </sup>
                 </div>
             </div>
 

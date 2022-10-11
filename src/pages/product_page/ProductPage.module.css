@@ -19,6 +19,11 @@
 .arrows{
     display: flex;
 }
+.arrowButton{
+    padding: 0;
+    background-color: white;
+    border: none;
+}
 .leftArrows{
     margin-right: 60px;
 }
@@ -32,7 +37,7 @@
 .contentContainer{
     display: flex;
     column-gap: 60px;
-    margin: 20px 0 100px 0;
+    margin-top: 20px;
 }
 .imageContainer{
     display: flex;
