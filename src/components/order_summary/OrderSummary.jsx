@@ -9,7 +9,6 @@ export default function OrderSummary() {
     const freeShippingOver = 49900;
     const delivery = 2900;
 
-    console.log(basketProducts);
     const total = basketProducts.reduce((sum, current) => {
         return sum + current.count * current.price
     }, 0)
@@ -17,20 +16,20 @@ export default function OrderSummary() {
     return (
         <div className={style.container}>
             <div className={style.orderElement}>
-                <p>{basketProducts.length} Products</p>
-                <p>{total} AMD</p>
+                <p className={style.orderElement}>{basketProducts.length} Products</p>
+                <p className={style.price}>{total} AMD</p>
             </div>
             <div className={style.orderElement}>
                 <p>Delivery charges</p>
-                <p>{delivery} AMD</p>
+                <p className={style.price}>{delivery} AMD</p>
             </div>
             <div className={style.orderElement}>
                 <p>Free Shipping Over 49,900 AMD</p>
-                <p>-{delivery} AMD</p>
+                <p className={style.price}>-{delivery} AMD</p>
             </div>
             <div className={style.total}>
                 <p>TOTAL</p>
-                <p>
+                <p className={style.price}>
                     {
                         total > freeShippingOver ? `${total} AMD` : `${total + delivery} AMD`
                     }

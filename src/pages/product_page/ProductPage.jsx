@@ -21,7 +21,7 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import Reviews from '../../components/reviews/Reviews';
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 
-export default function ProductPage() {
+export default function ProductPage({openBasketNavBar}) {
   const [product, setProduct] = useState({});
   const [like, setLike] = useState(false);
   const [dislike, setDislike] = useState(false);
@@ -158,7 +158,14 @@ export default function ProductPage() {
 
           {
             basketProduct && 
-              <button className={`${style.button} ${style.orderButton}`}>Process order</button>
+              <NavLink to="/basket">
+                <button 
+                  className={`${style.button} ${style.orderButton}`}
+                  onClick={() => openBasketNavBar(true)}
+                >
+                  Process order
+                </button>
+              </NavLink>
           }
 
           <div className={`${style.storeAvailabilityContainer} ${style.guideHover}`}>

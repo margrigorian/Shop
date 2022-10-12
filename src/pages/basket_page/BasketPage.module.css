@@ -1,0 +1,146 @@
+.container{
+    min-height: 100vh;
+}
+.content{
+    padding: 0 7% 0 10%;
+}
+
+
+.basketNavBar{
+    width: 55vw;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.5px;
+    margin-bottom: 40px;
+}
+.drawerHeader{
+    width: 50%;
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    color: rgb(212, 209, 209);
+    padding: 20px 0;
+    border-bottom: 1.5px solid rgb(241, 240, 240);
+}
+.drawerHeader:hover {
+    color: grey;
+    border-color: grey;
+}
+.wishListHeaderText{
+    margin: 0 auto;
+}
+
+
+.basketContainer{
+    width: 85vw;
+    display: flex;
+    justify-content: space-between;
+    /* border: 1px solid; */
+}
+.productsContainer{
+    width: 65%;
+}
+.orderContainer{
+    width: 31%;
+    color:rgb(33, 32, 32);
+}
+.orderSummaryText{
+    margin: 0 0 15px 14px;
+    font-weight: 500;
+    font-size: 18px;
+}
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+}
+.buyButton{
+    width: 90%;
+}
+.button{
+    border-radius: 10px;
+    background-color: rgb(45, 45, 45);
+    border: none;
+    cursor: pointer;
+    color: white;
+    letter-spacing: 0.5px;
+    padding: 4% 0;
+}
+.button:hover{
+    background-color: rgb(192, 190, 190);
+}
+
+.emptyBasketContainer{
+    display: flex;
+    width: 85vw;
+    color: rgb(52, 51, 51);
+}
+.emptyBasketContent{
+    width: 65%;
+    margin-right: 50px;
+    /* width: 55vw; */
+    /* display: flex; */
+}
+/* .containerPart{
+    width: 50%;
+} */
+.image{
+    width: 25%;
+    height: 55vh;
+    background-image: url("https://www.fashiongonerogue.com/wp-content/uploads/2019/06/Massimo-Dutti-Join-Life-2019-Lookbook13-450x675.jpg");
+    background-size: cover;
+    background-position: center 0%;
+}
+
+
+.textContainer{
+    width: 420px;
+    margin: 8% auto 0 auto;
+    letter-spacing: 0.5px;
+}
+.iconContainer{
+    display: flex;
+    justify-content: center;
+    color:rgb(52, 51, 51);
+}
+.textCentral{
+    text-align: center;
+}
+.textAboutEmptyBasket{
+    font-weight: bold;
+    font-size: 18px;
+    margin: 2% 0 5% 0;
+}
+.textAboutFavourites{
+    font-size: 13px;
+    padding: 0 8%;
+    font-weight: 500;
+    margin-bottom: 12%;
+}
+.seeCollectionButton{
+    width: 60%;
+}
+
+
+.iconContainer{
+    display: flex;
+    justify-content: center;
+    color:rgb(52, 51, 51);
+}
+.textAboutSeeWishList{
+    font-weight: 500;
+    font-size: 18px;
+    padding: 0 12%;
+    margin: 2% 0 15% 0;
+}
+.textAboutSignUpOrLogin{
+    font-size: 13px;
+    font-weight: 500;
+}
+.textSpan{
+    border-bottom: 1.5px solid;
+}
+.textSpan:hover {
+    color:rgb(137, 136, 136);  
+    cursor: pointer; 
+}

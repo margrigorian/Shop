@@ -3,13 +3,14 @@ import style from "./BasketDrawer.module.css";
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectBasket } from '../../store/slices/slice-basket';
+import { NavLink } from 'react-router-dom';
 import { Drawer, Divider } from '@mui/material';
 import BasketContent from '../basket_content/BasketContent';
 import OrderSummary from '../order_summary/OrderSummary';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 
-export default function BasketDrawer({openCart, closeCart}) {
+export default function BasketDrawer({openCart, closeCart, changeStatusOfBasketNavBar}) {
   const [activeChapter, setActiveChapter] = useState(true); 
   const basketProducts = useSelector(selectBasket); 
 
@@ -64,7 +65,15 @@ export default function BasketDrawer({openCart, closeCart}) {
                       <div className={style.buttonContainer}>
                         <button className={style.button}>See new collection</button>
                       </div> 
-                    </div> : <div className={style.basketDrawerContent}><BasketContent /></div> :
+                    </div> : <div className={style.basketDrawerContent}>
+                                {/* ПЕРЕАДЕТ changeStatusOfBasketNavBar, ИНАЧЕ ВЫДАЕТ ПУСТУЮ КОРЗИНУ */}
+                                <BasketContent 
+                                  closeBasketNavBar={changeStatusOfBasketNavBar} 
+                                  // ПРОПСЫ РАЗМЕРОВ НЕ СЧИТЫВАЮТСЯ
+                                  // imgSize={"80px"} 
+                                  // productInfoContainerSize={"80px"}
+                                />
+                            </div> :
                     
                     <div className={style.basketContent}>
                       <div className={style.iconContainer}>
@@ -82,9 +91,17 @@ export default function BasketDrawer({openCart, closeCart}) {
             basketProducts.basket.products.length !== 0 && activeChapter ? 
                 <div>
                   <OrderSummary />
-                  <div className={style.buttonContainer}>
-                    <button className={style.orderButton}>Go to your shopping basket</button>
-                  </div>
+                  <NavLink 
+                    to="/basket" style={{textDecoration: "none"}} 
+                    onClick={() => {
+                      closeCart()
+                      changeStatusOfBasketNavBar(true)
+                    }}
+                  >
+                    <div className={style.buttonContainer}>
+                      <button className={style.orderButton}>Go to your shopping basket</button>
+                    </div>
+                  </NavLink>
                 </div> : undefined
           }
 

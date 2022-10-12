@@ -66,6 +66,7 @@
     letter-spacing: 0.5px;
 }
 .menuListItem{
+    width:max-content;
     cursor: pointer;
     display: block;
 }

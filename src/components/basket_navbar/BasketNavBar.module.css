@@ -1,0 +1,18 @@
+.header{
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 2%;
+    background-color: white;
+    color: rgb(33, 32, 32);
+    border-bottom: 1px solid lightgrey;
+}
+.logo{
+    color: rgb(52, 51, 51);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    font-size: 15px;
+}

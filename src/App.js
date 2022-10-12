@@ -6,13 +6,15 @@ import Menu from './components/menu/Menu';
 import LoginDrawer from './components/login_drawer/LoginDrawer';
 import RegistrationForm from './components/registration_form/RegistrationForm';
 import SuccessRegistrationMessage from './components/registration_message/SuccessRegistrationMessage';
-import { Modal, ThemeProvider } from '@mui/material';
 import BasketDrawer from './components/basket_drawer/BasketDrawer';
 import StartPage from './pages/start_page/StartPage';
 import LimitedEditionPage from './pages/limited_edition_page/LimitedEditionPage';
 import ProductPage from './pages/product_page/ProductPage';
+import BasketNavBar from './components/basket_navbar/BasketNavBar';
+import BasketPage from './pages/basket_page/BasketPage';
 import ScrollToTheTop from './hoc/ScrollToTheTop';
 import Footer from './components/footer/Footer';
+import { Modal, ThemeProvider } from '@mui/material';
 import theme from './theme/theme';
 
 
@@ -22,6 +24,7 @@ function App() {
   const [openRegistrationForm, setOpenRegistrationForm] = useState(false);
   const [successRegistrationMessage, setSuccessRegistrationMessage] = useState(false);
   const [openBasketDrawer, setOpenBasketDrawer] = useState(false);
+  const [basketNavBar, setBasketNavBar] = useState(false);
 
   function changeRegistrationMode() {
     setOpenRegistrationForm(!openRegistrationForm);
@@ -75,14 +78,21 @@ function App() {
         <BasketDrawer 
           openCart={openBasketDrawer} 
           closeCart={() => setOpenBasketDrawer(false)} 
+          changeStatusOfBasketNavBar={setBasketNavBar}
         />
 
-          <ScrollToTheTop />
+        {
+          basketNavBar && <BasketNavBar  closeBasketNavBar={setBasketNavBar} />
+        }
+
+        <ScrollToTheTop />
+
         <Routes>
           <Route path="/" element={<StartPage />}></Route> 
           <Route path="/collection"></Route>
           <Route path="/limited-edition-page" element={<LimitedEditionPage />}></Route>
-          <Route path="/product/:id" element={<ProductPage />}></Route>
+          <Route path="/product/:id" element={<ProductPage openBasketNavBar={setBasketNavBar}/>}></Route>
+          <Route path="/basket" element={<BasketPage closeBasketNavBar={setBasketNavBar} />}></Route>
         </Routes>
 
         <div className={style.wrapper}>
