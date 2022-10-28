@@ -1,5 +1,6 @@
 .container{
     min-height: 100vh;
+    margin-bottom: 60px;
 }
 .content{
     padding: 0 7% 0 10%;
@@ -87,7 +88,7 @@
 .image{
     width: 25%;
     height: 55vh;
-    background-image: url("https://www.fashiongonerogue.com/wp-content/uploads/2019/06/Massimo-Dutti-Join-Life-2019-Lookbook13-450x675.jpg");
+    background-image: url("../../pictures/Massimo-Dutti-Join-Life-2019.jpg");
     background-size: cover;
     background-position: center 0%;
 }

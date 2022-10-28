@@ -1,24 +1,42 @@
 import React from 'react';
 import style from "./RegistrationForm.module.css";
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import Checkbox from '@mui/material/Checkbox';
-import { TextField } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { selectBasket } from '../../store/slices/slice-basket';
+import { getToken } from '../../store/slices/slice-basket';
+import { useDispatch } from 'react-redux';
+import request from '../../store/request/request';
+// import { PRODUCTS_API_HOST } from '../../store/request/link';
+import { tokenLink } from '../../store/request/link';
 
-export default function RegistrationForm({changeRegistrationMode, getSuccessRegistrationMessage}) {
-
-    const { register,getValues, formState: { errors }, reset, handleSubmit, control} = useForm({
+export default function RegistrationForm({closeCart, changeRegistrationMode, getSuccessRegistrationMessage}) {
+    const token = useSelector(selectBasket);
+    const dispatch = useDispatch();
+    const { register, formState: { errors }, reset, handleSubmit} = useForm({
         mode:"onBlur"
     });
 
-    const onSubmit = (data) => {
-        console.log(JSON.stringify(data), getValues());
-        reset();
-    };
+    console.log(token.token);
 
+    const onSubmit = (data) => {
+        reset();
+
+        async function getNewToken(data) {
+            const userToken = await request("POST", tokenLink, data, "token");
+            dispatch(getToken({userToken: userToken.data.data.token}));
+        }
+        
+        getNewToken(data);
+
+        closeCart();
+        getSuccessRegistrationMessage(true);
+    };
+    
     return (
         <div className={style.registrationFormContainer} onClick={(event) => event.stopPropagation()}>
             <p className={style.closeIcon} onClick={() => changeRegistrationMode()}>&#x2717;</p>
@@ -33,7 +51,8 @@ export default function RegistrationForm({changeRegistrationMode, getSuccessRegi
                         name="row-radio-buttons-group"
                     >
                         <div className={style.radioFemale}>
-                            <FormControlLabel {...register("gender")} 
+                            <FormControlLabel 
+                                // {...register("gender")} 
                                 value="female" 
                                 control={<Radio />} 
                                 label="Female"
@@ -50,7 +69,8 @@ export default function RegistrationForm({changeRegistrationMode, getSuccessRegi
                             />
                         </div>
 
-                        <FormControlLabel {...register("gender")} 
+                        <FormControlLabel 
+                            // {...register("gender")} 
                             value="male" 
                             control={<Radio />} 
                             label="Male" 
@@ -69,22 +89,23 @@ export default function RegistrationForm({changeRegistrationMode, getSuccessRegi
                 </div>
 
                 <div className={style.inputContainer}>
-                    <input {...register("name", {
+                    <input {...register("fullname", {
                             required: true,
                         })} 
                         className={style.input}
                         placeholder='Name'
-                        style={{ borderColor: errors?.name && "rgb(212, 31, 31)" }}
+                        style={{ borderColor: errors?.fullname && "rgb(212, 31, 31)" }}
                     />
                     <div className={style.error}>
-                        {errors?.name && <p>This field is required</p>}
+                        {errors?.fullname && <p>This field is required</p>}
                     </div>
                 </div>
                 
                 <div className={style.inputContainer}>
-                    <input {...register("surname", {
-                            required: true,
-                        })} 
+                    <input 
+                        // {...register("surname", {
+                            // required: true,
+                        // })} 
                         className={style.input}
                         placeholder='Surname'
                         style={{ borderColor: errors?.surname && "rgb(212, 31, 31)" }}
@@ -95,7 +116,7 @@ export default function RegistrationForm({changeRegistrationMode, getSuccessRegi
                 </div>
 
                 <div className={style.inputContainer}>
-                        <input {...register("login", {
+                        <input {...register("email", {
                             required: true,
                             pattern: {
                                 value: /([A-z0-9_.-]{1,})@([A-z0-9_.-]{1,}).([A-z]{2,8})/,
@@ -104,10 +125,10 @@ export default function RegistrationForm({changeRegistrationMode, getSuccessRegi
                         })} 
                             className={style.input}
                             placeholder='Email address'
-                            style={{ borderColor: errors?.login && "rgb(212, 31, 31)" }}
+                            style={{ borderColor: errors?.email && "rgb(212, 31, 31)" }}
                         />
                         <div className={style.error}>
-                            {errors?.login && <p>{errors?.login?.message || "This field is required"}</p>}
+                            {errors?.email && <p>{errors?.email?.message || "This field is required"}</p>}
                         </div>
                     </div>
 
@@ -115,8 +136,8 @@ export default function RegistrationForm({changeRegistrationMode, getSuccessRegi
                         <input {...register("password", {
                             required: true,
                             minLength: {
-                                value: 5,
-                                message: "Minimum of 5 characters"
+                                value: 8,
+                                message: "Minimum of 8 characters"
                             }
                         })} 
                             type="Password"
@@ -131,28 +152,24 @@ export default function RegistrationForm({changeRegistrationMode, getSuccessRegi
 
                     <FormGroup>
                         <div className={style.checkboxPolicyContainer}>
-                            <Controller
-                                name="acceptPrivacyPolicy"
-                                control={control}
-                                render={({field}) => <FormControlLabel {...field} 
-                                    control={<Checkbox />} 
-                                    // ПОСЛЕ ОТПРАВКИ ФОРМЫ ОСТАЕТСЯ ВЫДЕЛЕННЫМ. ПОЧЕМУ НЕ РАБОТАЕТ RESET?
-                                    // менять значение через onchange и state? 
-    
-                                    // label="I accept the Privacy Policy"
-                                    // id="privacyPolicy" не связывает с <label>
-                                    sx={{ 
-                                        '& .MuiSvgIcon-root': { 
-                                            fontSize: 30, 
-                                            color: errors?.acceptPrivacyPolicy ? "rgb(212, 31, 31)" : "rgb(192, 190, 190)"
-                                        },
-                                        // '& .MuiFormControlLabel-label': {
-                                        //     fontSize: 12,
-                                        //     letterSpacing: "0.5px"
-                                        // }
-                                    }}
-                                />}
-                            />
+                            <FormControlLabel 
+                                 // {...register("recieveNews")} 
+                                 control={<Checkbox />}
+                                // ПОСЛЕ ОТПРАВКИ ФОРМЫ ОСТАЕТСЯ ВЫДЕЛЕННЫМ. ПОЧЕМУ НЕ РАБОТАЕТ RESET?
+                                // менять значение через onchange и state?  
+
+                                // id="privacyPolicy" не связывает с <label> 
+                                sx={{ 
+                                    '& .MuiSvgIcon-root': { 
+                                        fontSize: 30, 
+                                        color: errors?.acceptPrivacyPolicy ? "rgb(212, 31, 31)" : "rgb(192, 190, 190)"
+                                    },
+                                    // '& .MuiFormControlLabel-label': {
+                                    //     fontSize: 12,
+                                    //     letterSpacing: "0.5px"
+                                    // }
+                                }}
+                             />
                             
                             <label className={style.checkboxLabel}>
                                 I accept the <span className={style.policySpan}>Privacy Policy</span>
@@ -160,7 +177,8 @@ export default function RegistrationForm({changeRegistrationMode, getSuccessRegi
                         </div>
 
                         <div className={style.checkboxReceiveNewsContainer}>
-                            <FormControlLabel {...register("recieveNews")} 
+                            <FormControlLabel 
+                                // {...register("recieveNews")} 
                                 control={<Checkbox />} 
                                 // label="I agree to receive news, notifications and offers from Massimo Dutti" 
                                 sx={{ 

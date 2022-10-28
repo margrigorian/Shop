@@ -1,5 +1,6 @@
 .container{
     letter-spacing: 0.5px;
+    font-family: serif;
 }
 .largePicture{
     width: 66vw;
@@ -15,7 +16,7 @@
     padding-left: 2.5%;
 }
 .newInText{
-    margin-right: 42%;
+    margin-right: 40.5%;
 }
 .dialogsText{
     font-weight: 500;
@@ -64,14 +65,15 @@
     padding: 15px 50px;
     background-color: rgb(40, 40, 40);
     color: white;
-    font-size: 14px;
+    font-family: serif;
+    font-size: 15px;
     letter-spacing: 0.5px;
     cursor: pointer;
 }
 .goToContainer{
     display: flex;
     color: white;
-    font-size: 13px;
+    font-size: 14px;
 }
 .goToElement{
     margin-left: 20px;

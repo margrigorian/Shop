@@ -3,7 +3,7 @@
 }
 .reviewsText{
     font-size: 25px;
-    font-weight: 500;
+    font-weight: bold;
 }
 .reviewsNumberSpan{
     font-size: 16px;
@@ -12,6 +12,8 @@
 .starsContainer{
     display: flex;
     justify-content: center;
+    position: relative;
+    z-index: -1;
 }
 .grade{
     width: 240px;
@@ -20,9 +22,11 @@
     justify-content: center;
     margin: 50px 0 100px 0;
 }
-.noReviewsText{
+.averageRatingText{
     font-size: 14px;
     color: grey;
+    width: 120px;
+    text-align: center;
 }
 .buttonLeaveReviews{
     width: 100%;
@@ -30,7 +34,8 @@
     border-radius: 10px;
     padding: 15px 0;
     color: white;
-    font-size: 14px;
+    font-family: serif;
+    font-size: 15px;
     letter-spacing: 0.5px;
     cursor: pointer;
     margin-top: 40px;
@@ -38,6 +43,18 @@
 }
 .buttonLeaveReviews:hover {
     background-color: grey;
+}
+.alert{
+    position: absolute;
+    top: 40%;
+    right: 26%;
+    width: 200px;
+    padding: 14px 0;
+    border: 1.5px solid rgb(52, 51, 51);
+    border-radius: 10px;
+    background-color: rgb(252, 248, 248);
+    text-align: center;
+    font-size: 15px;
 }
 
 .reviewForm{
@@ -51,6 +68,7 @@
     width: 100%;
     padding: 15px;
     border: 1px solid lightgrey;
+    font-family: serif;
     letter-spacing: 0.5px;
 }
 .commentInputContainer{
@@ -61,7 +79,7 @@
     font-family: "Gill Sans", sans-serif;
 }
 .error{
-    font-size: 12px;
+    font-size: 14px;
     color: rgb(212, 31, 31);
     letter-spacing: -0.3px;
     margin-top: 3px;
@@ -72,7 +90,8 @@
     border-radius: 10px;
     padding: 15px 0;
     background-color: white;
-    font-size: 14px;
+    font-family: serif;
+    font-size: 15px;
     letter-spacing: 0.5px;
     cursor: pointer;
 }
@@ -82,8 +101,9 @@
 }
 .name{
     font-size: 18px;
-    font-weight: 500;
+    font-weight: bold;
     margin-bottom: 20px;
+    color: rgb(71, 70, 70);
 }
 .review{
     padding: 20px 30px;

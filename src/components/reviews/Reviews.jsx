@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from "./Reviews.module.css";
 import { useForm } from "react-hook-form";
-
-import { useDispatch } from 'react-redux';
-import { addReviewToProduct } from '../../store/slices/slice-products';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectBasket } from '../../store/slices/slice-basket';
+import { addCommentToProduct } from '../../store/slices/slice-basket'; 
 import StarBorderIcon from '@mui/icons-material/StarBorder'; 
+import request from '../../store/request/request';
+import { addCommentLink } from '../../store/request/link';
 
 export default function Reviews({product}) {
+    const basketProducts = useSelector(selectBasket);
+    const [basketProduct, setBasketProduct] = useState(null);
+    const [alert, setAlert] = useState(false);
     const { register, formState: { errors }, reset, handleSubmit } = useForm({
         mode:"onBlur"
     });
@@ -20,10 +25,29 @@ export default function Reviews({product}) {
     const monthDay = date.getDate();
     const year = date.getFullYear();
 
+    useEffect(() => {
+        const currentProduct = basketProducts.basket.products.find(item => item.id === product.id);
+        setBasketProduct(currentProduct);
+    }, [product.id, basketProducts.basket.products])
+
     const onSubmit = (data) => {
-        dispatch(addReviewToProduct({review: JSON.stringify(data), id: product.id}));
-        reset();
+        if(basketProduct) {
+            dispatch(addCommentToProduct({review: JSON.stringify(data), id: product.id}));
+            reset();
+            if(typeof product.id !== "number") {
+                async function addComment() {
+                    const add = await request("POST", addCommentLink, {"product_id": product.id, "body" : data.body}, basketProducts.token);
+                    console.log(add);
+                }
+    
+                addComment();
+            }
+        }else {
+            setAlert(true);
+        }
     };
+
+    // console.log(basketProduct);
 
     return (
         <div className={style.container}>
@@ -31,7 +55,7 @@ export default function Reviews({product}) {
                 Reviews&nbsp; 
                 <sup>
                     <span className={style.reviewsNumberSpan}>
-                        {product.reviews ? product.reviews.length : 0}
+                        {product.comments ? product.comments.length : 0}
                     </span>
                 </sup>
             </p>
@@ -44,16 +68,26 @@ export default function Reviews({product}) {
                         <StarBorderIcon sx={{fontSize: "26px", marginRight: "5px"}} />
                         <StarBorderIcon sx={{fontSize: "26px"}} />
                     </div>
-                    <p className={style.noReviewsText}>No reviews yet</p>
+                    <p className={style.averageRatingText}>Average rating</p>
                     <button 
                         className={style.buttonLeaveReviews}
-                        onClick={() => setOpenTextArea(true)}
+                        onClick={() => {
+                            if(basketProduct) {
+                                setAlert(false);
+                                setOpenTextArea(true);
+                            }else {
+                                setAlert(true);
+                            }
+                        }}
                     >
                         {
-                            product.reviews ? "Leave review" : "Be the first to review"
+                            product.comments ? "Leave review" : "Be the first to review"
                         }
                     </button>
                 </div>
+                {
+                    alert && <div className={style.alert}>Add product to Basket</div>
+                }
             </div>
 
             {
@@ -87,11 +121,28 @@ export default function Reviews({product}) {
             }
 
             {
-                product.reviews &&
-                    product.reviews.map((item, i) => 
+                !basketProduct ? 
+                    product.comments &&
+                        product.comments.map((item, i) => 
+                                <div key={`ReviewId-${i}`} className={style.reviewContainer}>
+                                    <p className={style.name}>{item.author.fullname}</p>
+                                    <div className={style.review}>
+                                        <p 
+                                            className={style.date}
+                                        >
+                                            {`${monthNames[month-1]} ${monthDay}, ${year}`}
+                                        </p>
+                                        <p>{item.body}</p>
+                                    </div>
+                                </div>
+                        ) :
+
+                        basketProduct.comments &&
+                            basketProduct.comments.map((item, i) => 
                             <div key={`ReviewId-${i}`} className={style.reviewContainer}>
-                                {/* ИМЯ БУДЕТ ИЗ ТОКЕНА */}
-                                <p className={style.name}>Name</p>
+                                <p className={style.name}>
+                                    {item.author !== undefined ? item.author.fullname : "Name"}
+                                </p>
                                 <div className={style.review}>
                                     <p 
                                         className={style.date}
@@ -101,7 +152,7 @@ export default function Reviews({product}) {
                                     <p>{item.body}</p>
                                 </div>
                             </div>
-                    )
+                            )    
             }
 
         </div>

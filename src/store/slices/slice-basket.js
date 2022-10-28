@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const basketSlice = createSlice({
     name: "basket",
     initialState: {
+        token: "",
         basket: {
             products: []
             // count: 0,
@@ -10,6 +11,9 @@ const basketSlice = createSlice({
         }
     },
     reducers: {
+        getToken: (state, action) => {
+            state.token = action.payload.userToken;
+        },
         add: (state, action) => {
             const newProduct = state.basket.products.find(item => item.id === action.payload.id);
 
@@ -27,6 +31,20 @@ const basketSlice = createSlice({
             const currentProduct = state.basket.products.find(item => item.id === action.payload.id);
             currentProduct.count = +action.payload.count; 
         },
+        addCommentToProduct: (state, action) => {
+            const comment = JSON.parse(action.payload.review);
+
+            state.basket.products = state.basket.products.map(item => {
+                if(item.id === action.payload.id && item.comments === undefined) {
+                    return {...item, comments: [comment]};
+                }else if(item.id === action.payload.id && item.comments !== undefined) {
+                    const comments = [...item.comments, comment];
+                    return item = {...item, comments};
+                }else {
+                    return item;
+                }
+            })
+        },
         remove: (state, action) => {
             state.basket.products = state.basket.products.filter(item => item.id !== action.payload);
         }
@@ -35,7 +53,7 @@ const basketSlice = createSlice({
 
 export default basketSlice.reducer;
 
-export const {add: addToBasket, changeCount: changeProductCountInBasket, remove} = basketSlice.actions;
+export const {getToken, add: addToBasket, changeCount: changeProductCountInBasket, addCommentToProduct, remove} = basketSlice.actions;
 
 export const selectBasket = (state) => state.basket;
 

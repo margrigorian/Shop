@@ -8,10 +8,6 @@
     padding-bottom: 3px;
     font-size: 14px;
 }
-.price{
-    width: 110px;
-    text-align: right;
-}
 .total{
     display: flex;
     justify-content: space-between;

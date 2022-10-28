@@ -1,0 +1,32 @@
+.container{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.searchContainer{
+    display: flex;
+    align-items: center;
+    margin: 10px 0 10px 13%;
+    /* border: 1px solid; */
+}
+.searchInput{
+    width: 50vw;
+    padding: 15px 0;
+    border: none;
+    border-bottom: 1px solid  rgb(52, 51, 51);;
+    outline: none;
+    font-family: serif;
+    letter-spacing: 0.5px;
+}
+
+/* Убирает синий крест в строке input. Скопировано */
+input[type=text]::-ms-clear {  display: none; width : 0; height: 0; }
+input[type=text]::-ms-reveal {  display: none; width : 0; height: 0; }
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }

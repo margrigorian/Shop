@@ -9,6 +9,9 @@ import { remove } from '../../store/slices/slice-basket';
 import { NavLink } from 'react-router-dom';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import request from '../../store/request/request';
+import { updateCountLink } from '../../store/request/link';
+import { addRemoveProductLink } from '../../store/request/link';
 
 export default function BasketContent({closeBasketNavBar, imgSize, productInfoContainerSize}) {
     // НЕ МОГУ ЧЕРЕЗ ПРОПСЫ ПЕРЕДАТЬ РАЗМЕР КАРТИНКИ, КОНТЕЙНЕРОВ... ПОЧЕМУ?
@@ -18,12 +21,33 @@ export default function BasketContent({closeBasketNavBar, imgSize, productInfoCo
     function selectQuantity(product) {
         const quantity = [];
 
-        for(let i = 1; i <= product.maxCount; i++) {
-            quantity.push(i);
+        if(product.maxCount !== undefined) {
+            for(let i = 1; i <= product.maxCount; i++) {
+                quantity.push(i);
+            }
+        }else {
+            for(let i = 1; i <= 10; i++) {
+                quantity.push(i);
+            }
         }
 
         return quantity;
     }
+
+    async function updateCount(productId, prevCount, newCount) {
+        if(prevCount < newCount) {
+            const update = await request("PUT", updateCountLink, {"product_id": productId, "action": "increase"}, basketProducts.token);
+            console.log(update);
+        }else {
+            const update = await request("PUT", updateCountLink, {"product_id": productId, "action": "decrease"}, basketProducts.token);
+            console.log(update);
+        }
+    }
+
+    async function deteteProduct(productId) {
+        const remove = await request("DELETE", addRemoveProductLink, {"product_id": productId}, basketProducts.token);
+        console.log(remove);
+      }
 
     return (
         <div className={style.container}>
@@ -41,7 +65,7 @@ export default function BasketContent({closeBasketNavBar, imgSize, productInfoCo
                             <div className={style.productInfo}>
                                 <NavLink to={`/product/${item.id}`} onClick={() => closeBasketNavBar()}>
                                     <div 
-                                        style={{backgroundImage: `url(${item.url})`}} 
+                                        style={{backgroundImage: `url(${item.src})`}} 
                                         className={style.productImg}>
                                     </div>
                                 </NavLink>
@@ -58,8 +82,13 @@ export default function BasketContent({closeBasketNavBar, imgSize, productInfoCo
                                         <select value={item.count}
                                             onChange={
                                                 (evt) => {
-                                                    dispatch(changeCount({id: item.id, count: evt.target.value}))
-                                                    dispatch(changeProductCountInBasket({id: item.id, count: evt.target.value}))
+                                                    if(typeof item.id === "number") {
+                                                        dispatch(changeCount({id: item.id, count: evt.target.value}))
+                                                        dispatch(changeProductCountInBasket({id: item.id, count: evt.target.value}))
+                                                    }else {
+                                                        updateCount(item.id, item.count, evt.target.value);
+                                                        dispatch(changeProductCountInBasket({id: item.id, count: evt.target.value}))
+                                                    }
                                                 }
                                             }
                                         >
@@ -89,7 +118,14 @@ export default function BasketContent({closeBasketNavBar, imgSize, productInfoCo
                                         />
                                         <DeleteOutlineIcon 
                                             sx={{fontSize: "19px"}}
-                                            onClick={() => dispatch(remove(item.id))}
+                                            onClick={() => {
+                                                if(typeof item.id === "number") {
+                                                    dispatch(remove(item.id))
+                                                }else {
+                                                    deteteProduct(item.id);
+                                                    dispatch(remove(item.id));
+                                                }
+                                            }}
                                         />
                                     </div>
                                 </div>

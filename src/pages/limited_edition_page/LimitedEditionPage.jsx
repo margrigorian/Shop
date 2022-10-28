@@ -14,7 +14,7 @@ export default function LimitedEditionPage() {
                     <p 
                         className={`${style.limitedEditionNavBarEl} ${style.cursor} ${style.colorHover}`}
                         style={{
-                            borderBottom: !activePageNavBarElement ? "1.5px solid" : undefined
+                            borderBottom: !activePageNavBarElement ? "1px solid" : undefined
                         }}
                         onClick={() => setActivePageNavBarElement(false)}
                     >
@@ -22,7 +22,7 @@ export default function LimitedEditionPage() {
                     </p>
                     <p 
                         className={`${style.cursor} ${style.colorHover}`}
-                        style={{borderBottom: activePageNavBarElement ? "1.5px solid" : undefined}}
+                        style={{borderBottom: activePageNavBarElement ? "1px solid" : undefined}}
                         onClick={() => setActivePageNavBarElement(true)}
                     >
                         COLLECTION

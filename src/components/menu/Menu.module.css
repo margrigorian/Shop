@@ -4,37 +4,25 @@
     width: 100vw;
     height: 100vh;
     background-color: white;
+    font-family: serif;
+    letter-spacing: 1px;
 }
 .menuHeader{
     display: flex;
     align-items: center;
-    padding: 15px 35px;
+    padding: 22px 35px;
     margin-bottom: 15px;
 }
-.closeContainer{
-    width: 320px;
-    display: flex;
-    align-items: center;
-    color: rgb(68, 67, 67);
-}
-.closeIcon{
-    font-size: 20px;
-    cursor: pointer;
-    padding:0 20px 5px 0;
-
-}
-.closeIcon:hover {
-    color:rgb(137, 136, 136);
-}
 .menuHeaderText{
-    letter-spacing: 0.5px;
-    border-bottom: 1px solid;
+    width: 320px;
+    color: grey;
+    font-weight: bold;
     padding-bottom: 5px;
     cursor: pointer;
     font-weight: 500;
 }
 .menuHeaderText:hover {
-    color:rgb(137, 136, 136);
+    color:black;
 }
 
 
@@ -44,14 +32,14 @@
     align-items: center;
 }
 .searchInput{
-    color: rgb(68, 67, 67);
-    background-color:  rgb(253, 251, 251);
     letter-spacing: 1px;
-    font-size: 14;
+    font-family: serif;
+    /* font-size: 12px; */
     width: 100%;
-    padding: 10px;
+    padding-bottom: 10px;
     border: none;
-    border-bottom: 1px solid rgb(68, 67, 67);
+    border-bottom: 1px solid lightgrey;
+    outline: none;
 }
 
 .menuContentContainer{
@@ -63,12 +51,13 @@
     padding: 35px;
     font-size: 20px;
     font-weight: bold;
-    letter-spacing: 0.5px;
+    /* border: 1px solid; */
 }
 .menuListItem{
     width:max-content;
     cursor: pointer;
     display: block;
+    color: black;
 }
 .menuListItem:hover {
     color:rgb(137, 136, 136);
@@ -77,11 +66,32 @@
     margin-bottom: 18%;
 }
 .listItemPadding{
-    padding-bottom: 4%;
+    margin-bottom: 4%;
 }
 .collectionListItem{
-    text-decoration: underline;
+    border-bottom: 1px solid;
 }
-.menuImage{
-    flex-grow: 10;
+.menuImageContainer{
+    position: relative;
+    flex-grow: 12;
+    padding: 5%;
+    display: flex;
+    justify-content: end;
+}
+.gif{
+    top: 0;
+    left: 3%;
+    width: 48%;
+    height: 53%;
+    position: absolute;
+    background-image: url("../../pictures/220217_MD_EDIE_FINAL_logo+2-high.gif");
+    background-size: cover;
+    background-position: center;
+}
+.image{
+    width: 55%;
+    height: 110%;
+    background-image: url("../../pictures/Parker-Van-Noord-Massimo-Dutti-FW21-01.jpg");
+    background-size: cover;
+    background-position: 100% 66%;
 }

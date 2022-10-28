@@ -2,28 +2,51 @@ import React from 'react';
 import style from "./LoginForm.module.css";
 import { useForm } from "react-hook-form";
 import Checkbox from '@mui/material/Checkbox';
+import { useSelector } from 'react-redux';
+import { selectBasket } from '../../store/slices/slice-basket';
+import { getToken } from '../../store/slices/slice-basket';
+import { useDispatch } from 'react-redux';
+import request from '../../store/request/request';
+import { tokenLink } from '../../store/request/link';
 
 export default function LoginForm({closeCart, changeRegistrationMode, openRegistrationForm}) {
+    const token = useSelector(selectBasket);
+    const dispatch = useDispatch();
     // useForm - это метод, который возварщает объект
     const { register, formState: { errors }, reset, handleSubmit} = useForm({
         mode:"onBlur"
     });
 
     const onSubmit = (data) => {
-        console.log(JSON.stringify(data));
         reset();
+
+        async function getNewToken(data) {
+            const userToken = await request("POST", tokenLink, data, "token");
+            dispatch(getToken({userToken: userToken.data.data.token}));
+            // if(token.token) { // НЕ СРАБАТЫВАЕТ НА УСЛОВИИ. ПОЧЕМУ?
+                closeCart();
+            // }
+        }
+        
+        getNewToken(data);
+        
     };
 
     return (
-            <div className={style.formContainer}>
-                <p className={style.closeIcon} onClick={() => closeCart()}>&#x2717;</p>
+            <div className={style.formContainer} onClick={(event) => event.stopPropagation()}>
+                <p 
+                    className={style.closeIcon} 
+                    onClick={() => token.token !== "" ? closeCart() : undefined}
+                >
+                    &#x2717;
+                </p>
 
                 <form className={style.form} onSubmit={handleSubmit(onSubmit)} >
                     <p className={style.loginHeaderText}>Log in</p>
                     <p className={style.enterYourDataText}>Enter your email and password to enter</p>
 
                     <div className={style.loginInputContainer}>
-                        <input {...register("login", {
+                        <input {...register("email", {
                             required: true,
                             pattern: {
                                 value: /([A-z0-9_.-]{1,})@([A-z0-9_.-]{1,}).([A-z]{2,8})/,
@@ -32,10 +55,10 @@ export default function LoginForm({closeCart, changeRegistrationMode, openRegist
                         })} 
                             className={style.input}
                             placeholder='Email address *'
-                            style={{ borderColor: errors?.login && "rgb(212, 31, 31)" }}
+                            style={{ borderColor: errors?.email && "rgb(212, 31, 31)" }}
                         />
                         <div className={style.error}>
-                            {errors?.login && <p>{errors?.login?.message || "This field is required"}</p>}
+                            {errors?.email && <p>{errors?.email?.message || "This field is required"}</p>}
                         </div>
                     </div>
 
@@ -43,8 +66,8 @@ export default function LoginForm({closeCart, changeRegistrationMode, openRegist
                         <input {...register("password", {
                             required: true,
                             minLength: {
-                                value: 5,
-                                message: "Minimum of 5 characters"
+                                value: 8,
+                                message: "Minimum of 8 characters"
                             }
                         })} 
                             type="Password"

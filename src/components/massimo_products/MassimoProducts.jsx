@@ -19,7 +19,7 @@ export default function MassimoProducts() {
                     <div key={`productId-${item.id}`} className={style.productsContainer}>
                         <NavLink to={`/product/${item.id}`}>
                             <div 
-                                style={{backgroundImage: `url(${item.url}`}} 
+                                style={{backgroundImage: `url(${item.src}`}} 
                                 className={style.productsImage}
                             >
                             </div>

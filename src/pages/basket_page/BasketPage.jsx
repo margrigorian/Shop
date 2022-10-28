@@ -6,10 +6,17 @@ import BasketContent from '../../components/basket_content/BasketContent';
 import OrderSummary from '../../components/order_summary/OrderSummary';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
+import request from '../../store/request/request';
+import { purchaseLink } from '../../store/request/link';
 
 export default function BasketPage({closeBasketNavBar}) {
     const [activeChapter, setActiveChapter] = useState(true); 
     const basketProducts = useSelector(selectBasket);
+
+    async function makePurchase() {
+        const purchase = await request("POST", purchaseLink, undefined, basketProducts.token);
+        console.log(purchase);
+    }
 
     return (
         <div className={style.container}>
@@ -48,7 +55,12 @@ export default function BasketPage({closeBasketNavBar}) {
                                     <p className={style.orderSummaryText}>Order Summary</p>
                                     <OrderSummary />
                                     <div className={style.buttonContainer}>
-                                        <button className={`${style.button} ${style.buyButton}`}>Pay for the order</button>
+                                        <button 
+                                            className={`${style.button} ${style.buyButton}`}
+                                            onClick={() => makePurchase()}
+                                        >
+                                            Pay for the order
+                                        </button>
                                     </div>
                                 </div>
                             </div> : 
