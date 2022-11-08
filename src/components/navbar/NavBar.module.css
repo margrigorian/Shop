@@ -9,6 +9,8 @@
     color: rgb(33, 32, 32);
     background-color: white;
     font-family: serif;
+    /* Иначе на ProductPage случается накладка */
+    z-index: 1; 
     /* box-shadow: 0px 0px 15px grey; */
 }
 /* .active{

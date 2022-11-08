@@ -11,6 +11,8 @@ import SuccessRegistrationMessage from './components/registration_message/Succes
 import BasketDrawer from './components/basket_drawer/BasketDrawer';
 import StartPage from './pages/start_page/StartPage';
 import LimitedEditionPage from './pages/limited_edition_page/LimitedEditionPage';
+import CollectionPage from './pages/collection_page/CollectionPage';
+import AccessoriasPage from './pages/accessorias_page/AccessoriasPage';
 import ProductPage from './pages/product_page/ProductPage';
 import SearchNavBar from './components/search_navbar/SearchNavBar';
 import SearchPage from './pages/search_page/SearchPage';
@@ -19,6 +21,7 @@ import BasketPage from './pages/basket_page/BasketPage';
 import ScrollToTheTop from './hoc/ScrollToTheTop';
 import Footer from './components/footer/Footer';
 import request from './store/request/request';
+import { categoriesLink } from './store/request/link';
 import { Modal, ThemeProvider } from '@mui/material';
 import theme from './theme/theme';
 
@@ -32,16 +35,22 @@ function App() {
   const [openBasketDrawer, setOpenBasketDrawer] = useState(false);
   const [searchNavBar, setSearchNavBar] = useState(false);
   const [basketNavBar, setBasketNavBar] = useState(false);
-  const [searchProducts, setSearchProducts] = useState([]);
+  const [categoriesProducts, setCategoriesProducts] = useState([]);
 
   function changeRegistrationMode() {
     setOpenRegistrationForm(!openRegistrationForm);
   }
 
   async function getSearchProducts(inputText) {
-    // const products = await request("POST", searchProductLink(inputText), undefined, token.token);
-    // setSearchProducts(products);
+    if(inputText) {
+      const products = await request("GET", categoriesLink(inputText), inputText, token.token);
+      setCategoriesProducts(products.data.data.items);
+    }else {
+      setCategoriesProducts([]);
+    }
   }
+
+  console.log(categoriesProducts);
 
   function getSuccessRegistrationMessage() {
     setSuccessRegistrationMessage(!successRegistrationMessage);
@@ -112,10 +121,11 @@ function App() {
 
         <Routes>
           <Route path="/" element={<StartPage />}></Route> 
-          <Route path="/collection"></Route>
+          <Route path="/collection" element={<CollectionPage />}></Route>
           <Route path="/limited-edition-page" element={<LimitedEditionPage />}></Route>
+          <Route path="/accessorias" element={<AccessoriasPage />}></Route>
           <Route path="/product/:id" element={<ProductPage openBasketNavBar={setBasketNavBar}/>}></Route>
-          <Route path="/search" element={<SearchPage closeSearchNavBar={setSearchNavBar} searchProducts={searchProducts} />}></Route>
+          <Route path="/search" element={<SearchPage closeSearchNavBar={setSearchNavBar} categoriesProducts={categoriesProducts} />}></Route>
           <Route path="/basket" element={<BasketPage closeBasketNavBar={setBasketNavBar} />}></Route>
         </Routes>
 

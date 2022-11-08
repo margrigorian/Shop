@@ -10,15 +10,13 @@ export default function SearchNavBar({closeSearchNavBar, getSearchProducts}) {
 
     useEffect(() => {
         const handle = setTimeout(async () => {
-            if(inputText !== "") {
-                getSearchProducts(inputText);
-            }
+            getSearchProducts(inputText);
         }, 1000) // пока будет происходить новый запрос с задержкой в секунду, старый удалится
 
         return () => {
            clearTimeout(handle); // запросы не будет происходить одновременно и не будут накладываться друг на друга
         } 
-    }, [inputText, getSearchProducts])
+    }, [inputText])
 
     return (
         <div className={style.container}>

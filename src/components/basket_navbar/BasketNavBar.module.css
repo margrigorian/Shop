@@ -9,6 +9,7 @@
     background-color: white;
     color: rgb(33, 32, 32);
     border-bottom: 1px solid lightgrey;
+    z-index: 1;
 }
 .logo{
     color: rgb(52, 51, 51);

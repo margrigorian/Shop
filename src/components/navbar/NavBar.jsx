@@ -43,7 +43,7 @@ export default function NavBar({openMenu, openLoginDrawer, openBasketDrawer, ope
 
                 <div className={style.navBarElementContainer}>
                     <NavLink 
-                        // to={token !== "" ? '/collection-page/' : undefined} 
+                        to={token.token !== "" ? '/collection/' : undefined} 
                         className={style.navBarElement} 
                         onClick={() => token.token === "" ? openLoginDrawer() : undefined} // переход на страницу
                         // activeclassname={style.active}

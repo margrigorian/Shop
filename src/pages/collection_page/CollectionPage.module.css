@@ -1,0 +1,13 @@
+.container{
+    min-height: 90vh;
+    font-family: serif;
+    margin-bottom: 70px;
+}
+.headColorBlock{
+    margin: 50px 0;
+    padding: 30px 3%;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: right;
+    background-color: rgb(206, 177, 150);
+}

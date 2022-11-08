@@ -6,6 +6,7 @@
     background-color: white;
     font-family: serif;
     letter-spacing: 1px;
+    z-index: 1;
 }
 .menuHeader{
     display: flex;

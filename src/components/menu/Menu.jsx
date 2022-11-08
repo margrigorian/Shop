@@ -43,12 +43,16 @@ export default function Menu({closeMenu, setSearchNavBar}) {
                 </NavLink>
                 <p className={`${style.menuListItem} ${style.listItemMarginBottom}`}>NEW IN</p>
                 <div className={style.listItemMarginBottom}>
+                    <NavLink to="/collection" style={{textDecoration: "none"}} onClick={() => closeMenu()}>
                         <p 
                             className={`${style.menuListItem} ${style.collectionListItem} ${style.listItemPadding}`}
                         >
                             COLLECTION
                         </p>
-                    <p className={`${style.menuListItem} ${style.listItemPadding}`}>ACCESSORIAS</p>
+                    </NavLink>
+                    <NavLink to="/accessorias" style={{textDecoration: "none"}} onClick={() => closeMenu()}>
+                        <p className={`${style.menuListItem} ${style.listItemPadding}`}>ACCESSORIAS</p>
+                    </NavLink>
                     <p className={`${style.menuListItem} ${style.listItemPadding}`}>SHOES</p>
                 </div>
                 <div className={style.listItemMarginBottom}>

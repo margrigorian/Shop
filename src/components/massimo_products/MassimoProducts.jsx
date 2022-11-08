@@ -1,21 +1,19 @@
 import React from 'react';
 import style from "./MassimoProducts.module.css";
 import { NavLink } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectProducts } from '../../store/slices/slice-products';
+import { useDispatch } from 'react-redux';
 import { add } from '../../store/slices/slice-products';
 import { addToBasket } from '../../store/slices/slice-basket';
 import AddIcon from '@mui/icons-material/Add';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 
-export default function MassimoProducts() {
-    const allProducts = useSelector(selectProducts);
+export default function MassimoProducts({allProducts}) {
     const dispatch = useDispatch();
     
     return (
         <div className={style.container}>
             {
-                allProducts.massimoProducts.map(item => 
+                allProducts.map(item => 
                     <div key={`productId-${item.id}`} className={style.productsContainer}>
                         <NavLink to={`/product/${item.id}`}>
                             <div 

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import style from "./LimitedEditionPage.module.css";
+import { useSelector } from 'react-redux';
+import { selectProducts } from '../../store/slices/slice-products';
 import MassimoProducts from '../../components/massimo_products/MassimoProducts';
 
 
 export default function LimitedEditionPage() {
+    const allProducts = useSelector(selectProducts);
     const [activePageNavBarElement, setActivePageNavBarElement] = useState(true);
 
     return (
@@ -44,7 +47,7 @@ export default function LimitedEditionPage() {
 
             <p className={style.capsule}>CAPSULE</p>
 
-            <MassimoProducts />
+            <MassimoProducts allProducts={allProducts.massimoProducts} />
         </div>
     )
 }
